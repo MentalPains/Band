@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import RecordList from './components/telephoneList';
+import RecordList from './components/telephonelist';
 import Create from './components/create';
 import Edit from './components/edit';
 import Navbar from './components/navbar';
