@@ -1,40 +1,45 @@
 import React from "react";
-// We import bootstrap to make our application look better.
+import { NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-// We import NavLink to utilize the react router.
-import { NavLink } from "react-router-dom";
-
-// Here, we display our Navbar
 export default function Navbar() {
     return (
-        <div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <NavLink className="navbar-brand" to="/">
-                    <img style={{"width" : 10 + '%' }} src="https://static.vecteezy.com/system/resources/previews/006/857/347/original/telephone-directory-concepts-vector.jpg"/>
-                </NavLink>
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon"></span>
-                </button>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <NavLink className="navbar-brand" to="/">
+                <img style={{ width: '10%' }} src="https://media.discordapp.net/attachments/703590092849283132/1195431906808963242/image_2024-01-13_021535806.png?ex=65b3f7b8&is=65a182b8&hm=4c8aade4d2a9fd08000764641d05375bc0fa934d3a952f78efc77020974e89ae&=&format=webp&quality=lossless&width=500&height=500" alt="Logo"/>
+            </NavLink>
+            <button
+                className="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span className="navbar-toggler-icon"></span>
+            </button>
 
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/create">
-                                Create Record
-                            </NavLink>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav ml-auto">
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="/create">
+                            Create Member
+                        </NavLink>
+                    </li>
+                    {/* Assuming you have routes for editing and deleting */}
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="/edit">
+                            Edit Member
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="/delete">
+                            Delete Member
+                        </NavLink>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     );
 }

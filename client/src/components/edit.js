@@ -12,7 +12,7 @@ export default function Edit() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`http://localhost:5050/record/${params.id.toString()}`);
+      const response = await fetch(`http://localhost:5050/member/${params.id.toString()}`);
 
       if (!response.ok) {
         const message = `An error has occurred: ${response.statusText}`;
@@ -20,15 +20,15 @@ export default function Edit() {
         return;
       }
 
-      const record = await response.json();
+      const member = await response.json();
 
-      if (!record) {
-        window.alert(`Record with id ${params.id} not found`);
+      if (!member) {
+        window.alert(`Member with id ${params.id} not found`);
         navigate('/');
         return;
       }
 
-      setForm(record);
+      setForm(member);
     }
 
     fetchData();
@@ -47,7 +47,7 @@ export default function Edit() {
       mobile: form.mobile,
     };
 
-    await fetch(`http://localhost:5050/record/${params.id}`, {
+    await fetch(`http://localhost:5050/member/${params.id}`, {
       method: 'PATCH',
       body: JSON.stringify(editedPerson),
       headers: {
@@ -61,7 +61,7 @@ export default function Edit() {
   // This following section will display the form that takes input from the user to update the data.
   return (
     <div>
-      <h3>Update Record</h3>
+      <h3>Update Member</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name: </label>
@@ -97,7 +97,7 @@ export default function Edit() {
         <div className="form-group">
           <input
             type="submit"
-            value="Update Record"
+            value="Update Member"
             className="btn btn-primary"
           />
         </div>

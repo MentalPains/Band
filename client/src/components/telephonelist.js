@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Record = (props) => (
+const Member = (props) => (
   <tr>
-    <td>{props.record.name}</td>
-    <td>{props.record.email}</td>
-    <td>{props.record.mobile}</td>
+    <td>{props.member.name}</td>
+    <td>{props.member.email}</td>
+    <td>{props.member.mobile}</td>
     <td>
-      <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link>
+      <Link className="btn btn-link" to={`/edit/${props.member._id}`}>Edit</Link>
       <button className="btn btn-link"
        onClick={() => {
-        props.deleteRecord(props.record._id);
+        props.deleteMember(props.member._id);
        }}
      >
         Delete
@@ -19,13 +19,13 @@ const Record = (props) => (
   </tr>
 );
 
-export default function RecordList() {
-  const [records, setRecords] = useState([]);
+export default function MemberList() {
+  const [members, setMembers] = useState([]);
 
-  // This method fetches the records from the database.
+  // This method fetches the members from the database.
   useEffect(() => {
-    async function getRecords() {
-      const response = await fetch('http://localhost:5050/record/');
+    async function getMembers() {
+      const response = await fetch('http://localhost:5050/member/');
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
@@ -33,42 +33,42 @@ export default function RecordList() {
         return;
       }
 
-      const records = await response.json();
-      setRecords(records);
+      const members = await response.json();
+      setMembers(members);
     } 
 
-    getRecords();
+    getMembers();
 
     return;
-  }, [records.length]);
+  }, [members.length]);
 
-  // This method will delete a record
-  async function deleteRecord(id) {
-    await fetch(`http://localhost:5050/record/${id}`, {
+  // This method will delete a member
+  async function deleteMember(id) {
+    await fetch(`http://localhost:5050/member/${id}`, {
       method: "DELETE"
     });
 
-    const newRecords = records.filter((el) => el._id !== id);
-    setRecords(newRecords);
+    const newMembers = members.filter((el) => el._id !== id);
+    setMembers(newMembers);
   }
 
-  // This method will map out the records on the table
-  function recordList() {
-    return records.map((record) => {
+  // This method will map out the members on the table
+  function memberList() {
+    return members.map((member) => {
       return (
-        <Record
-          record={record}
-          deleteRecord={() => deleteRecord(record._id)}
-          key={record._id}
+        <Member
+          member={member}
+          deleteMember={() => deleteMember(member._id)}
+          key={member._id}
         />
       );
     });
   }
 
-  // This following section will display the table with the records of individuals.
+  // This following section will display the table with the members of individuals.
   return (
     <div>
-      <h3>Record List</h3>
+      <h3>Member List</h3>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
           <tr>
@@ -78,7 +78,7 @@ export default function RecordList() {
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>{recordList()}</tbody>
+        <tbody>{memberList()}</tbody>
       </table>
     </div>
   );
