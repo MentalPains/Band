@@ -25,12 +25,13 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   let newDocument = {
     name: req.body.name,
-    email: req.body.email,
-    mobile: req.body.mobile,
+    year: req.body.year,           // Change to year
+    instrument: req.body.instrument,     // Change to instrument they play
+    leadership: req.body.leadership,     // Change to leadership position
   };
   let collection = await db.collection("members");
   let result = await collection.insertOne(newDocument);
-  res.send(result).status(204);
+  res.send(result).status(201); // Use 201 for created
 });
 
 // This section will help you update a member by id.
@@ -39,15 +40,17 @@ router.patch("/:id", async (req, res) => {
   const updates = {
     $set: {
       name: req.body.name,
-      email: req.body.email,
-      mobile: req.body.mobile,
+      year: req.body.year,           // Change to year
+      instrument: req.body.instrument,     // Change to instrument
+      leadership: req.body.leadership,     // Change to leadership
     },
   };
 
   let collection = await db.collection("members");
   let result = await collection.updateOne(query, updates);
-  res.send(result).status(200);
+  res.send(result).status(200); // OK status for updates
 });
+
 
 // This section will help you delete a member
 router.delete("/:id", async (req, res) => {
@@ -60,3 +63,5 @@ router.delete("/:id", async (req, res) => {
 });
 
 export default router;
+
+
