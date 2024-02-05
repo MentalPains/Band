@@ -1,0 +1,26 @@
+.App-header {
+    background-color: var(--body_background);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: var(--body_color);
+}
+
+.App-link {
+    color: var(--link_color);
+}
+
+body.dark-theme {
+    --body_background: var(--body_background_dark);
+    --body_color: var(--body_color_dark);
+    --link_color: var(--link_color_dark);
+}
+
+body {
+    --body_background: var(--body_background_light);
+    --body_color: var(--body_color_light);
+    --link_color: var(--link_color_light);
+}
