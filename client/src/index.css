@@ -10,6 +10,9 @@
   --link_color-dark: cyan;
 }
 
+* {
+  transition: all 0.35 ease-in-out;
+}
 
 body {
   margin: 0;
