@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 const Member = (props) => (
   <tr>
     <td>{props.member.name}</td>
-    <td>{props.member.email}</td>
-    <td>{props.member.mobile}</td>
+    <td>{props.member.year}</td> {/* Adjusted to show year in polytechnic */}
+    <td>{props.member.instrument}</td> {/* Adjusted to show instrument */}
+    <td>{props.member.leadership}</td> {/* Adjusted to show leadership position */}
     <td>
       <Link className="btn btn-link" to={`/edit/${props.member._id}`}>Edit</Link>
       <button className="btn btn-link"
@@ -54,16 +55,15 @@ export default function MemberList() {
 
   // This method will map out the members on the table
   function memberList() {
-    return members.map((member) => {
-      return (
-        <Member
-          member={member}
-          deleteMember={() => deleteMember(member._id)}
-          key={member._id}
-        />
-      );
-    });
+    return members.map((member) => (
+      <Member
+        member={member}
+        deleteMember={() => deleteMember(member._id)}
+        key={member._id}
+      />
+    ));
   }
+  
 
   // This following section will display the table with the members of individuals.
   return (
@@ -73,8 +73,9 @@ export default function MemberList() {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Email</th>
-            <th>Mobile</th>
+            <th>Year in Polytechnic</th>
+            <th>Instrument</th>
+            <th>Leadership Position</th>
             <th>Action</th>
           </tr>
         </thead>

@@ -4,8 +4,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 export default function Edit() {
   const [form, setForm] = useState({
     name: '',
-    email: '',
-    mobile: '',
+    year: '',
+    instrument: '',
+    leadership: '',
   });
   const params = useParams();
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export default function Edit() {
         return;
       }
 
-      setForm(member);
+      setForm(member); // Make sure the member object has the same structure as your form state
     }
 
     fetchData();
@@ -41,15 +42,16 @@ export default function Edit() {
 
   async function onSubmit(e) {
     e.preventDefault();
-    const editedPerson = {
+    const editedMember = {
       name: form.name,
-      email: form.email,
-      mobile: form.mobile,
+      year: form.year,
+      instrument: form.instrument,
+      leadership: form.leadership,
     };
 
     await fetch(`http://localhost:5050/member/${params.id}`, {
       method: 'PATCH',
-      body: JSON.stringify(editedPerson),
+      body: JSON.stringify(editedMember),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -58,13 +60,13 @@ export default function Edit() {
     navigate('/');
   }
 
-  // This following section will display the form that takes input from the user to update the data.
+  //This following section will display the form that takes input from the user to update the data.
   return (
     <div>
-      <h3>Update Member</h3>
+      <h3>Update Member Information</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">
-          <label htmlFor="name">Name: </label>
+          <label htmlFor="name">Full Name: </label>
           <input
             type="text"
             className="form-control"
@@ -74,23 +76,34 @@ export default function Edit() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="email">Email: </label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            value={form.email}
-            onChange={(e) => updateForm({ email: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="mobile">Mobile: </label>
+          <label htmlFor="year">Year in Polytechnic: </label>
           <input
             type="text"
             className="form-control"
-            id="mobile"
-            value={form.mobile}
-            onChange={(e) => updateForm({ mobile: e.target.value })}
+            id="year"
+            value={form.year}
+            onChange={(e) => updateForm({ year: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="instrument">Instrument: </label>
+          <input
+            type="text"
+            className="form-control"
+            id="instrument"
+            value={form.instrument}
+            onChange={(e) => updateForm({ instrument: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="leadership">Leadership Position: </label>
+          <input
+            type="text"
+            className
+            ="form-control"
+            id="leadership"
+            value={form.leadership}
+            onChange={(e) => updateForm({ leadership: e.target.value })}
           />
         </div>
         <br />

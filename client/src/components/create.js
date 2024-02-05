@@ -3,25 +3,22 @@ import { useNavigate } from "react-router-dom";
 
 export default function Create() {
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    mobile: "",
+    name: "",           
+    year: "",           
+    instrument: "",     
+    leadership: "",     
   });
   const navigate = useNavigate();
 
-  // This method will update the state properties.
   function updateForm(value) {
     return setForm((prev) => {
       return { ...prev, ...value };
     });
   }
 
-  // This function will handle the submission.
   async function onSubmit(e) {
     e.preventDefault();
-
-    // When a post request is sent to the create url, we'll add a new member to the database.
-    const newPerson = { ...form };
+    const newMember = { ...form };
 
     try {
       await fetch("http://localhost:5050/member", {
@@ -29,11 +26,9 @@ export default function Create() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newPerson),
+        body: JSON.stringify(newMember),
       });
-
-      // Reset the form and navigate to the root page.
-      setForm({ name: "", email: "", mobile: "" });
+      setForm({ name: "", year: "", instrument: "", leadership: "" });
       navigate("/");
     } catch (error) {
       window.alert(error);
@@ -41,10 +36,9 @@ export default function Create() {
     }
   }
 
-  // This following section will display the form that takes the input from the user.
   return (
     <div>
-      <h3>Create New Member</h3>
+      <h3>Add New Member</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
@@ -57,29 +51,39 @@ export default function Create() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            value={form.email}
-            onChange={(e) => updateForm({ email: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="mobile">Mobile</label>
+          <label htmlFor="year">Year in Polytechnic</label>
           <input
             type="text"
             className="form-control"
-            id="mobile"
-            value={form.mobile}
-            onChange={(e) => updateForm({ mobile: e.target.value })}
+            id="year"
+            value={form.year}
+            onChange={(e) => updateForm({ year: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="instrument">Instrument</label>
+          <input
+            type="text"
+            className="form-control"
+            id="instrument"
+            value={form.instrument}
+            onChange={(e) => updateForm({ instrument: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="leadership">Leadership Position</label>
+          <input
+            type="text"
+            className="form-control"
+            id="leadership"
+            value={form.leadership}
+            onChange={(e) => updateForm({ leadership: e.target.value })}
           />
         </div>
         <div className="form-group">
           <input
             type="submit"
-            value="Create Person"
+            value="Create Member"
             className="btn btn-primary"
           />
         </div>
