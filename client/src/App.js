@@ -6,12 +6,12 @@ import Edit from './components/edit';
 import Navbar from './components/navbar';
 import Event from './components/event';
 import Attendance from './components/attendance';
-import DarkMode from './components/DarkMode/DarkMode';
+
 
 const App = () => {
   return (
     <div>
-      <DarkMode />
+
       <Navbar />
       <Routes>
         <Route path="/" element={<MemberList />} />

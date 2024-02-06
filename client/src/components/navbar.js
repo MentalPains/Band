@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import DarkMode from "./DarkMode/DarkMode";
+import { Contact } from "./contact";
 
 export default function Navbar() {
     return (
@@ -57,6 +59,13 @@ export default function Navbar() {
                             User
                         </NavLink>
                     </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="/contact">
+                            Contact Us
+                        </NavLink>
+                    </li>
+                    
+                    <DarkMode />
                 </ul>
             </div>
         </nav>
