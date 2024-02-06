@@ -15,7 +15,7 @@ const Contact = () => {
       .then(
         (result) => {
           console.log(result.text);
-          setMessage('Message sent successfully!');
+          setMessage('Your suggestion has been sent successfully!');
           setIsSuccess(true);
           // Optionally navigate to another route on success
           // navigate('/success');
@@ -31,15 +31,16 @@ const Contact = () => {
   };
 
   return (
-    <div>
+    <div style={{ textAlign: 'center', maxWidth: '500px', margin: 'auto' }}>
+      <h1>We love to hear from you</h1>
       <form ref={form} onSubmit={sendEmail} style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '500px', margin: 'auto' }}>
-        <label htmlFor="name">Name</label>
+        <label htmlFor="name">Your Name</label>
         <input type="text" name="name" id="name" required />
 
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">Your Email</label>
         <input type="email" name="email" id="email" required />
 
-        <label htmlFor="message">Suggestions</label>
+        <label htmlFor="message">Your Suggestion</label>
         <textarea name="message" id="message" required />
 
         <input type="submit" value="Send" />
