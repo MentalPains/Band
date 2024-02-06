@@ -1,70 +1,51 @@
-import { useRef, useState } from 'react';
-import styled from 'styled-components';
+import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
-
-// Styled components for form styling
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-  max-width: 400px;
-  margin: auto;
-`;
-
-const StyledInput = styled.input`
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-`;
-
-const StyledTextarea = styled.textarea`
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-`;
-
-const StyledButton = styled.button`
-  padding: 10px 20px;
-  background-color: blue;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-`;
 
 const Contact = () => {
   const form = useRef();
-  const [submitMessage, setSubmitMessage] = useState('');
+  const [message, setMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(null);
 
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, 'YOUR_PUBLIC_KEY')
+    emailjs.sendForm('email123', 'template_d03t6uq', form.current, 'DI1l_1_nxUNVM-Jzg')
       .then(
         (result) => {
           console.log(result.text);
-          setSubmitMessage('Email successfully sent!');
+          setMessage('Your Suggestion has been sent. Thank you for helping!');
+          setIsSuccess(true);
+          setTimeout(() => setMessage(''), 5000); // Clear message after 5 seconds
         },
         (error) => {
           console.log(error.text);
-          setSubmitMessage('Failed to send email. Please try again later.');
-        }
+          setMessage(`Failed to send message: ${error.text}`);
+          setIsSuccess(false);
+          setTimeout(() => setMessage(''), 5000); // Clear message after 5 seconds
+        },
       );
   };
 
   return (
-    <div>
-      <StyledForm ref={form} onSubmit={sendEmail}>
-        <label>Name</label>
-        <StyledInput type="text" name="name" required />
-        <label>Email</label>
-        <StyledInput type="email" name="email" required />
-        <label>Message</label>
-        <StyledTextarea name="message" required />
-        <StyledButton type="submit">Send</StyledButton>
-      </StyledForm>
-      {submitMessage && <p>{submitMessage}</p>}
+    <div style={{ textAlign: 'center', maxWidth: '500px', margin: 'auto' }}>
+      <h1>We love to hear from you</h1>
+      <form ref={form} onSubmit={sendEmail} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <label htmlFor="name">Name</label>
+        <input type="text" name="name" id="name" required />
+
+        <label htmlFor="email">Email</label>
+        <input type="email" name="email" id="email" required />
+
+        <label htmlFor="message">Suggestions</label>
+        <textarea name="message" id="message" required />
+
+        <input type="submit" value="Send" />
+      </form>
+      {message && (
+        <div style={{ color: isSuccess ? 'green' : 'red', marginTop: '10px' }}>
+          {message}
+        </div>
+      )}
     </div>
   );
 };
