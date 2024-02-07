@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+const [portrait, setPortrait] = useState(null);
+import { useDropzone } from 'react-dropzone';
+
 
 export default function Create() {
   const [form, setForm] = useState({
@@ -9,6 +12,18 @@ export default function Create() {
     leadership: "",
   });
   const navigate = useNavigate();
+  const [portrait, setPortrait] = useState(null);
+  const onDrop = useCallback((acceptedFiles) => {
+    // Do something with the files
+    const file = acceptedFiles[0];
+    console.log(file);
+    setPortrait(file);
+  }, []);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    multiple: false, // Only accept one file
+    accept: 'image/*' // Accept all image types
+  });
 
   function updateForm(value) {
     return setForm((prev) => {
@@ -19,6 +34,13 @@ export default function Create() {
   async function onSubmit(e) {
     e.preventDefault();
     const newMember = { ...form };
+
+    const formData = new FormData();
+    formData.append('name', form.name);
+    formData.append('year', form.year);
+    formData.append('instrument', form.instrument);
+    formData.append('leadership', form.leadership);
+    formData.append('portrait', portrait);
 
     try {
       await fetch("http://localhost:5050/member", {
@@ -114,6 +136,13 @@ export default function Create() {
             className="btn btn-primary"
           />
         </div>
+        <div {...getRootProps()} className="dropzone"></div>
+        <input {...getInputProps()} />
+        {
+          isDragActive ?
+            <p>Drop the image here ...</p> :
+            <p>Drag 'n' drop a portrait image here, or click to select</p>
+        }
       </form>
     </div>
   );
