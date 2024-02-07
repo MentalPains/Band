@@ -1,55 +1,52 @@
-/* Global styles for transitions */
-* {
+/* index.css */
+:root {
+    --transition-duration: 0.3s; /* Transition duration variable */
+    /* Light theme colors */
+    --body-background-light: #fff;
+    --text-color-light: #212529;
+    --nav-link-color-light: #007bff;
+    /* Dark theme colors */
+    --body-background-dark: #282c34;
+    --text-color-dark: #ffffff;
+    --nav-link-color-dark: #00bcd4;
+  }
+  
+  /* Global styles for transitions */
+  *,
+  *::before,
+  *::after {
     transition: background-color var(--transition-duration), color var(--transition-duration);
-}
-
-/* Define a CSS variable for the transition duration in the :root selector */
-
-
-/* Dark theme styles */
-body[data-theme='dark'] {
-    --nav-link-color: #e0e0e0;
-    /* Light color for dark theme text */
-    /* ... other dark theme variables ... */
-}
-
-/* Light theme styles */
-body[data-theme='light'] {
-    --nav-link-color: #212529;
-    /* Dark color for light theme text (Bootstrap default) */
-    /* ... other light theme variables ... */
-}
-
-/* Apply the theme styles to nav-link */
-.nav-link {
-    color: var(--nav-link-color);
-}
-
-/* Specific styles for when the body has the dark theme data attribute */
-body[data-theme='dark'] .nav-link {
-    color: var(--nav-link-color);
-    /* Use the CSS variable for the dark theme text color */
-}
-
-body {
+  }
+  
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     background-color: var(--body-background-light);
     color: var(--text-color-light);
-}
-
-/* Style for links */
-.nav-link {
-    color: var(--nav-link-color-light);
-    /* Light theme link color */
-}
-
-/* Override styles when dark theme is active */
-body[data-theme='dark'] {
+  }
+  
+  /* Apply the dark theme */
+  body[data-theme='dark'] {
     background-color: var(--body-background-dark);
     color: var(--text-color-dark);
-
-    /* Style for links in dark mode */
-    .nav-link {
-        color: var(--nav-link-color-dark);
-        /* Dark theme link color */
-    }
-}
+  }
+  
+  /* Apply the dark theme styles for links */
+  body[data-theme='dark'] .nav-link {
+    color: var(--nav-link-color-dark);
+  }
+  
+  /* Apply the dark theme styles for headings */
+  body[data-theme='dark'] h1,
+  body[data-theme='dark'] h2,
+  body[data-theme='dark'] h3,
+  body[data-theme='dark'] h4,
+  body[data-theme='dark'] h5,
+  body[data-theme='dark'] h6 {
+    color: var(--text-color-dark);
+  }
+  
