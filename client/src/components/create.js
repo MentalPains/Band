@@ -19,23 +19,33 @@ export default function Create() {
 
   async function onSubmit(e) {
     e.preventDefault();
-    const newMember = { ...form };
+
+    // Use FormData for multipart/form-data
+    const formData = new FormData();
+    formData.append('name', form.name);
+    formData.append('year', form.year);
+    formData.append('instrument', form.instrument);
+    formData.append('leadership', form.leadership);
+    formData.append('portrait', form.portrait); // Append file
 
     try {
       await fetch("http://localhost:5050/member", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newMember),
+        body: formData, // Send formData
       });
-      setForm({ name: "", year: "", instrument: "", leadership: "" });
       navigate("/");
     } catch (error) {
       window.alert(error);
       return;
     }
   }
+
+  
+  // Update form handling for file input:
+  function handleFileChange(e) {
+    setForm({ ...form, portrait: e.target.files[0] });
+  }
+
 
   return (
     <div>
@@ -107,6 +117,15 @@ export default function Create() {
             <option value="Librarians">Librarians</option>
             <option value="Truck Crew Captain">Truck Crew Captain</option>
           </select>
+        </div>
+        <div className="form-group">
+        <label htmlFor="portrait">Portrait</label>
+          <input
+            type="file"
+            className="form-control"
+            id="portrait"
+            onChange={handleFileChange}
+          />
         </div>
         <div className="form-group">
           <input
