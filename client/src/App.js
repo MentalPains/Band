@@ -6,6 +6,8 @@ import Edit from './components/edit';
 import Navbar from './components/navbar';
 import Event from './components/event';
 import Attendance from './components/attendance';
+import Contact from './components/contact';
+import DarkMode from './components/DarkMode/DarkMode';
 
 
 const App = () => {
@@ -19,6 +21,8 @@ const App = () => {
         <Route path="/create" element={<Create />} />
         <Route path="/event" element={<Event />} />
         <Route path="/attendance" element={<Attendance />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/darkmode" element={<DarkMode />} />
       </Routes>
     </div>
   );

@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import DarkMode from "./DarkMode/DarkMode";
-import { Contact } from "./contact";
 
 export default function Navbar() {
     return (

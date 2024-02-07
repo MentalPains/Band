@@ -91,3 +91,84 @@
     --bg-color: #161625;
     --heading-color: #818cab;
 }
+
+/* Light theme styles as default */
+body {
+    background-color: white;
+    color: black;
+}
+
+/* Dark theme styles */
+body[data-theme='dark'] {
+    background-color: black;
+    color: white;
+}
+
+/* Dark theme styles */
+body[data-theme='dark'] {
+    background-color: #121212; /* Very dark grey for background */
+    color: #e0e0e0; /* Light grey for text */
+  }
+  
+  body[data-theme='dark'] a,
+  body[data-theme='dark'] .navbar,
+  body[data-theme='dark'] .form-control,
+  body[data-theme='dark'] button,
+  body[data-theme='dark'] input,
+  body[data-theme='dark'] label {
+    color: #e0e0e0; /* Light grey for text in interactive elements */
+  }
+  
+  body[data-theme='dark'] .navbar {
+    background-color: #1e1e1e; /* Slightly lighter grey for navbar background */
+  }
+  
+  body[data-theme='dark'] .form-control {
+    background-color: #2a2a2a; /* Dark grey for form inputs */
+    border-color: #333333; /* Even darker grey to define borders of form inputs */
+  }
+  
+  body[data-theme='dark'] button {
+    background-color: #333333; /* Dark grey for buttons */
+    border-color: #444444; /* Even darker grey for button borders */
+  }
+  
+  /* Add additional selectors and styles for other elements as needed */
+  
+  /* Apply dark mode styles globally */
+body[data-theme='dark'] {
+    background-color: #121212; /* Dark background for dark mode */
+    color: #ffffff; /* Light text for dark mode */
+  }
+  
+  /* Style table headers and cells for dark mode */
+  body[data-theme='dark'] th,
+  body[data-theme='dark'] td {
+    background-color: #1c1c1c; /* Slightly lighter dark background for table cells */
+    border-color: #ffffff; /* Light borders for contrast */
+    color: #ffffff; /* Light text for readability */
+  }
+  
+  /* Style buttons for dark mode */
+  body[data-theme='dark'] .btn {
+    background-color: #333333; /* Dark background for buttons */
+    color: #ffffff; /* Light text for buttons */
+    border: 1px solid #ffffff; /* Light border for buttons */
+  }
+  
+  /* Ensure links are also styled for dark mode */
+  body[data-theme='dark'] a {
+    color: #4da6ff; /* A different color for links if you want */
+  }
+  
+  /* Any other custom styles for dark mode */
+  /* ... */
+  /* Global transition for smooth theme change */
+:root {
+    --transition-duration: 0.3s; /* You can adjust the duration as needed */
+  }
+  
+  * {
+    transition: background-color var(--transition-duration), color var(--transition-duration), border-color var(--transition-duration);
+  }
+  

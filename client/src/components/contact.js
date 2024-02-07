@@ -9,23 +9,35 @@ const Contact = () => {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm('email123', 'template_d03t6uq', form.current, 'DI1l_1_nxUNVM-Jzg')
-      .then(
-        (result) => {
-          console.log(result.text);
-          setMessage('Your Suggestion has been sent. Thank you for helping!');
-          setIsSuccess(true);
-          setTimeout(() => setMessage(''), 5000); // Clear message after 5 seconds
-        },
-        (error) => {
-          console.log(error.text);
-          setMessage(`Failed to send message: ${error.text}`);
-          setIsSuccess(false);
-          setTimeout(() => setMessage(''), 5000); // Clear message after 5 seconds
-        },
-      );
-  };
+    // Retrieve the value of the email field from the form
+    const email = form.current.querySelector('input[name="email"]').value;
 
+    // Simple regex for email validation
+    const emailRegex = /\S+@\S+\.\S+/;
+
+    if (emailRegex.test(email)) {
+      // If the email is valid, proceed with sending the email
+      emailjs.sendForm('email123', 'template_d03t6uq', form.current, 'DI1l_1_nxUNVM-Jzg')
+        .then(
+          (result) => {
+            console.log(result.text);
+            setMessage('Your Suggestion has been sent. Thank you for helping!');
+            setIsSuccess(true);
+            setTimeout(() => setMessage(''), 5000); // Clear message after 5 seconds
+          },
+          (error) => {
+            console.log(error.text);
+            setMessage(`Failed to send message: ${error.text}`);
+            setIsSuccess(false);
+            setTimeout(() => setMessage(''), 5000); // Clear message after 5 seconds
+          },
+        );
+    } else {
+      // If the email is invalid, set an error message
+      setMessage('Please enter a valid email address.');
+      setIsSuccess(false);
+    }
+  };
   return (
     <div style={{ textAlign: 'center', maxWidth: '500px', margin: 'auto' }}>
       <h1>We love to hear from you</h1>
