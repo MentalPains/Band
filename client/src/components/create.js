@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 export default function Create() {
   const [form, setForm] = useState({
     name: "",
@@ -17,6 +18,18 @@ export default function Create() {
     });
   }
 
+  function handleImageChange(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        // Use reader.result as Base64 string
+        updateForm({ portrait: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   async function onSubmit(e) {
     e.preventDefault();
     const newMember = { ...form };
@@ -29,7 +42,7 @@ export default function Create() {
         },
         body: JSON.stringify(newMember),
       });
-      setForm({ name: "", year: "", instrument: "", leadership: "" });
+      setForm({ name: "", year: "", instrument: "", leadership: "", portrait: "" });
       navigate("/");
     } catch (error) {
       window.alert(error);
@@ -107,6 +120,16 @@ export default function Create() {
             <option value="Librarians">Librarians</option>
             <option value="Truck Crew Captain">Truck Crew Captain</option>
           </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="portrait">Portrait</label>
+          <input
+            type="file"
+            className="form-control"
+            id="portrait"
+            onChange={handleImageChange}
+            // optional: accept="image/*" to restrict to image files
+          />
         </div>
         <div className="form-group">
           <input
